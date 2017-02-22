@@ -9,7 +9,7 @@ import java.util.Iterator;
  */
 public class MySet<E> implements Iterable<E>{
     private Object[] mySetBackingArray;
-    private int initialCapacity;
+    private int initialCapacity = 0;
     int currentElements = 0;
 
     MySet() {
@@ -112,18 +112,20 @@ public class MySet<E> implements Iterable<E>{
         return false;
     }
 
+    public Object[] toArray(){
+        Object[] newArray=new Object[currentElements];
+        for(int i=0;i<currentElements;i++){
+            newArray[i]=mySetBackingArray[i];
+        }
+        return newArray;
+    }
+
     boolean	removeAll(Collection<?> c) {
         return false;
     }
 
     boolean	retainAll(Collection<?> c) {
         return false;
-    }
-
-
-
-    Object[]	toArray() {
-        return null;
     }
 
     <T> T[]	toArray(T[] a) {
@@ -135,76 +137,4 @@ public class MySet<E> implements Iterable<E>{
         return null;
     }
 }
-
-//    public boolean removeAll(Collection<?> c){
-//        for(Object elem:c){
-//            this.remove(elem);
-//        }
-//        return true;
-//
-//    }
-//    public boolean retainAll(Collection<?> c){
-//        MySet<E> removalArray=new MySet<E>();
-//        for(E arrayElem:backingArray){
-//            if(arrayElem!= null && !(c.contains(arrayElem))){
-//                this.remove(arrayElem);
-//            }
-//        }
-//        return false;
-//    }
-//    public  <T> T[] toArray(T[] a) throws ArrayStoreException,NullPointerException{
-//        for(int i=0;i<numElements;i++){
-//            a[i]=(T)backingArray[i];
-//        }
-//        for(int j=numElements;j<a.length;j++){
-//            a[j]=null;
-//        }
-//        return a;
-//    }
-//    public Object[] toArray(){
-//        Object[] newArray=new Object[numElements];
-//        for(int i=0;i<numElements;i++){
-//            newArray[i]=backingArray[i];
-//        }
-//        return newArray;
-//    }
-//    public Iterator<E> iterator(){
-//        setIterator iterator=new setIterator();
-//        return iterator;
-//    }
-//private class setIterator implements Iterator<E>{
-//    private int currIndex;
-//    private E lastElement;
-//    public setIterator(){
-//        currIndex=0;
-//        lastElement=null;
-//    }
-//    public boolean hasNext(){
-//        while(currIndex<=numElements && backingArray[currIndex]==null){
-//            currIndex=currIndex+1;
-//        }
-//        if (currIndex<=numElements){
-//            return true;
-//        }
-//        return false;
-//    }
-//    public E next(){
-//        E element=backingArray[currIndex];
-//        currIndex=currIndex+1;
-//        lastElement=element;
-//        return element;
-//    }
-//    public void remove() throws UnsupportedOperationException,IllegalStateException{
-//        if(lastElement!=null){
-//            MySet.this.remove((Object)lastElement);
-//            numElements=numElements-1;
-//        }
-//        else{
-//            throw new IllegalStateException();
-//        }
-//    }
-//}
-//}
-
-
 

@@ -15,6 +15,7 @@ public class MySetTest {
     MySet s;
     MyArrayList r;
     MySet emptySetTester;
+    int[] testArray;
 
     @Before
     public void setup() {
@@ -29,6 +30,7 @@ public class MySetTest {
         s.add(2);
         s.add(3);
         s.add(3);
+        testArray = new int[]{1,2,3};
     }
 
     @Test
@@ -175,13 +177,5 @@ public class MySetTest {
         Integer expected = 3;
         Integer actual = s.size();
         assertEquals(expected,actual);
-    }
-
-    public void mySetToArrayDefaultTest() {
-
-    }
-
-    public void mySetToArrayCollectionTest() {
-
     }
 }
