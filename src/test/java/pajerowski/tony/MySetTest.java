@@ -3,6 +3,7 @@ package pajerowski.tony;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Collection;
 import java.util.Iterator;
 
 import static org.junit.Assert.*;
@@ -113,59 +114,65 @@ public class MySetTest {
         assertEquals(expected,actual);
     }
 
-
-    public void mySetContainsTest() {
-        Boolean expected = null;
-        Boolean actual = null;
+    @Test
+    public void mySetContainsAllTrueTest() {
+        Boolean expected = true;
+        emptySetTester.add(3);
+        Boolean actual = s.contains(emptySetTester);
         assertEquals(expected,actual);
     }
 
-    public void mySetContainsAllTest() {
-        Boolean expected = null;
-        Boolean actual = null;
-        assertEquals(expected,actual);
-    }
-
-
-    public void mySetHashCodeTest() {
-    }
-
-
-
-    public void mySetIteratorTest() {
-    }
-
-    public void mySetRemoveTrueTest() {
+    @Test
+    public void mySetContainsAllFalseTest() {
         Boolean expected = false;
-        Boolean actual = s.remove("cheese");
+        emptySetTester.add(5);
+        Boolean actual = s.contains(emptySetTester);
         assertEquals(expected,actual);
     }
 
+    @Test
+    public void mySetRemoveTrueTest() {
+        Boolean expected = true;
+        Boolean actual = s.remove(1);
+        assertEquals(expected,actual);
+    }
+
+    @Test
     public void mySetRemoveFalseTest() {
         Boolean expected = false;
         Boolean actual = s.remove("cheese");
         assertEquals(expected,actual);
     }
 
-    public void mySetRemoveElementRemovedTest() {
-        Boolean expected = false;
-        Boolean actual = s.remove("cheese");
+    @Test
+    public void mySetRemoveSizeVerificationTest() {
+        emptySetTester.add(1);
+        emptySetTester.add(2);
+        Integer expected = 1;
+        emptySetTester.remove(1);
+        Integer actual = emptySetTester.size();
         assertEquals(expected,actual);
     }
 
+    @Test
+    public void mySetElementRemovedTest() {
+        emptySetTester.add(1);
+        Boolean expected = false;
+        emptySetTester.remove(1);
+        Boolean actual = emptySetTester.contains(1);
+        assertEquals(expected,actual);
+    }
+
+    @Test
     public void mySetRemoveAllTest() {
-        Boolean expected = false;
-        Boolean actual = s.remove("cheese");
+        Boolean expected = null;
+        Boolean actual = null;
         assertEquals(expected,actual);
     }
 
-    public void mySetRetainAllTest() {
-
-    }
-
+    @Test
     public void mySetSizeTest() {
-        Integer expected = 2;
-
+        Integer expected = 3;
         Integer actual = s.size();
         assertEquals(expected,actual);
     }

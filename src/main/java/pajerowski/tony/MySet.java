@@ -9,20 +9,20 @@ import java.util.Iterator;
  */
 public class MySet<E> implements Iterable<E>{
     private Object[] mySetBackingArray;
+    private int initialCapacity;
     int currentElements = 0;
 
     MySet() {
+        this.initialCapacity = 10;
         mySetBackingArray = new Object[10];
         currentElements = 0;
     }
 
     MySet(int initialCapacity){
         mySetBackingArray = new Object[initialCapacity];
+        this.initialCapacity = initialCapacity;
         currentElements = 0;
     }
-
-    MySet(Collection<? extends E> c) {}
-
 
     public <E> boolean add(E e) {
         for (Object o : mySetBackingArray) {
@@ -58,7 +58,7 @@ public class MySet<E> implements Iterable<E>{
     }
 
     public boolean contains(Object o) {
-        for(Object backingElem : mySetBackingArray){
+        for (Object backingElem : mySetBackingArray){
             if (o!=null && o.equals(backingElem)){
                 return true;
             }
@@ -66,8 +66,13 @@ public class MySet<E> implements Iterable<E>{
         return false;
     }
 
-    public boolean containsAll(Collection <?> c){
-        return false;
+    public boolean containsAll(Collection<?> c){
+        for (Object elem: c){
+            if(!(this.contains(elem))){
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean equals(Object o) {
@@ -80,13 +85,9 @@ public class MySet<E> implements Iterable<E>{
         return false;
     }
 
-
-
-
-    public  int	hashCode() {
-        return -1;
+    int	size() {
+        return currentElements;
     }
-
 
     public boolean isEmpty(){
         if(currentElements == 0){
@@ -97,8 +98,17 @@ public class MySet<E> implements Iterable<E>{
         }
     }
 
-
     boolean	remove(Object o) {
+        int i=0;
+        for(Object elem:mySetBackingArray){
+            if(o!=null && o.equals(elem)){
+                mySetBackingArray[i]=null;
+                currentElements--;
+                Object[] newArray=Arrays.copyOf(mySetBackingArray,mySetBackingArray.length-1);
+                return true;
+            }
+            i++;
+        }
         return false;
     }
 
@@ -110,9 +120,7 @@ public class MySet<E> implements Iterable<E>{
         return false;
     }
 
-    int	size() {
-        return currentElements;
-    }
+
 
     Object[]	toArray() {
         return null;
@@ -128,58 +136,6 @@ public class MySet<E> implements Iterable<E>{
     }
 }
 
-
-
-//    public boolean equals(Object o){
-//        if(o instanceof Set &&(((Set)o).size()==numElements)){
-//            for(E elem:(Set<E>)o){
-//                if (this.contains(o)==false){
-//                    return false;
-//                }
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-//    public boolean contains(Object o){
-//        for(E backingElem:backingArray){
-//            if (o!=null && o.equals(backingElem)){
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-//    public boolean containsAll(Collection<?> c){
-//        for(E elem:(Set<E>)c){
-//            if(!(this.contains(elem))){
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
-//    public int hashCode(){
-//        int sum=0;
-//        for(E elem:backingArray){
-//            if(elem!=null){
-//                sum=sum+elem.hashCode();
-//            }
-//        }
-//        return sum;
-//    }
-
-//    public boolean remove(Object o){
-//        int i=0;
-//        for(Object elem:backingArray){
-//            if(o!=null && o.equals(elem)){
-//                backingArray[i]=null;
-//                numElements=numElements-1;
-//                E[] newArray=Arrays.copyOf(backingArray,backingArray.length-1);
-//                return true;
-//            }
-//            i=i+1;
-//        }
-//        return false;
-//    }
 //    public boolean removeAll(Collection<?> c){
 //        for(Object elem:c){
 //            this.remove(elem);
