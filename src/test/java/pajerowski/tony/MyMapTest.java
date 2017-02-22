@@ -22,6 +22,13 @@ public class MyMapTest {
     }
 
     @Test
+    public void myMapGetValueTest() {
+        Integer expected = 5;
+        Integer actual = stringInt.get("keyFor5");
+        assertEquals(expected,actual);
+    }
+
+    @Test
     public void myMapClearTest() {
         Integer expected = 0;
         m.put("key", 3);
@@ -31,64 +38,38 @@ public class MyMapTest {
     }
 
     @Test
-    public void myMapContainsKeyTest() {
-        Boolean expected = true;
-        m.put(1, 2);
-        Boolean actual = m.containsKey(1);
-        assertEquals(expected, actual);
+    public void myMapSizeTest() {
+        Integer expected = 1;
+        Integer actual = stringInt.size();
+        assertEquals(expected,actual);
     }
 
     @Test
-    public void myMapContatinsValue() {
-        Boolean expected = true;
-        m.put(1, 2);
-        Boolean actual = m.containsValue(2);
-        assertEquals(expected, actual);
+    public void myMapRemoveTest() {
+        Integer expected = 0;
+        stringInt.remove("keyFor5");
+        Integer actual = stringInt.size();
+        assertEquals(expected,actual);
     }
 
     @Test
-    public void myMapEntrySetTest() {
-
-    }
-
-    @Test
-    public void myMapEqualsTest() {
-        Boolean expected = true;
-        m.put(1, 2);
-        m.put(2, 2);
-        Boolean actual = (m.get(0)).equals(m.get(1));
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void myMapIsEmptyFalseTest() {
-        Boolean expected = false;
-        m.put(1, 2);
-        Boolean actual = m.isEmpty();
-        assertEquals(expected, actual);
+    public void myMapKeySetTest() {
+        stringInt.put("anotherkey", 55);
+            System.out.println(stringInt.keySet());
     }
 
     @Test
     public void myMapIsEmptyTrueTest() {
         Boolean expected = true;
-        Boolean actual = m.isEmpty();
-        assertEquals(expected, actual);
+        stringInt.clear();
+        Boolean actual = stringInt.isEmpty();
+        assertEquals(expected,actual);
     }
 
     @Test
-    public void myMapKeySet() {
-
-    }
-
-    @Test
-    public void myMapPutTest() {
-        Integer expected = 1;
-        Integer actual = stringInt.size();
-        assertEquals(expected, actual);
-    }
-
-    @Test  //takes key as argument and removes Key and Value for the key
-    public void myMapRemoveTest() {
-
+    public void myMapIsEmptyFalseTest() {
+        Boolean expected = false;
+        Boolean actual = stringInt.isEmpty();
+        assertEquals(expected,actual);
     }
 }

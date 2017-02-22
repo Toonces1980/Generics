@@ -24,6 +24,10 @@ public class MyMap<K, V> {
         return null;
     }
 
+    public void clear() {
+        size = 0;
+    }
+
     public void put(K key, V value) {
         boolean insert = true;
         for (int i = 0; i < size; i++) {
@@ -71,5 +75,11 @@ public class MyMap<K, V> {
             set.add(values[i].getKey());
         }
         return set;
+    }
+
+    public boolean isEmpty() {
+        if (size()==0) {
+            return true;
+        } else return false;
     }
 }
