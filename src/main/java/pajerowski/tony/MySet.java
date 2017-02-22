@@ -34,11 +34,12 @@ public class MySet<E> implements Iterable<E>{
              Object[] newArray = Arrays.copyOf(mySetBackingArray, mySetBackingArray.length *2);
              newArray[currentElements] = e;
              mySetBackingArray = newArray;
+             currentElements++;
              return true;
         }
         else {
             mySetBackingArray[currentElements] = e;
-            currentElements = currentElements + 1;
+            currentElements++;
             return true;
         }
     }
@@ -57,6 +58,11 @@ public class MySet<E> implements Iterable<E>{
     }
 
     public boolean contains(Object o) {
+        for(Object backingElem : mySetBackingArray){
+            if (o!=null && o.equals(backingElem)){
+                return true;
+            }
+        }
         return false;
     }
 
@@ -74,10 +80,6 @@ public class MySet<E> implements Iterable<E>{
         return false;
     }
 
-//    <E> Iterator<E> iterator() {
-//        return null;
-//    }
-
     boolean	remove(Object o) {
         return false;
     }
@@ -91,7 +93,7 @@ public class MySet<E> implements Iterable<E>{
     }
 
     int	size() {
-        return -1;
+        return currentElements;
     }
 
     Object[]	toArray() {

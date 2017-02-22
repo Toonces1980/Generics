@@ -13,19 +13,21 @@ import static org.junit.Assert.*;
 public class MySetTest {
     MySet s;
     MyArrayList r;
+    MySet emptySetTester;
 
     @Before
     public void setup() {
+        emptySetTester = new MySet();
         s = new MySet();
         r = new MyArrayList();
         r.add(1);
         r.add(2);
         r.add(3);
         r.add(3);
-        s.add(1);
+        s.add(1);  // set created should only have 3 elements, as value at position 2 and three are repeated.
         s.add(2);
         s.add(3);
-        s.add(4);
+        s.add(3);
     }
 
     @Test
@@ -36,30 +38,40 @@ public class MySetTest {
     }
 
     @Test
-    public void mySetAddTestValueAdded() {
-        Integer expected = 1;
+    public void mySetAddTestValueAddedTest() {
+        Integer expected = 3;
         Integer actual = s.size();
         assertEquals(expected,actual);
     }
 
-    public void mySetAddTestForValueAdded() {
-        Integer expected = -1;
-        s.add("1");
-        Integer actual = null;
-        assertEquals(expected,actual);
-    }
-
-    public void mySetAddTestForNoRepeatValues() {
+    @Test
+    public void mySetAddNoDuplicatesAddedTest() {
         Integer expected = 1;
-        s.add("1");
-        s.add("1");
-        Integer actual = s.size();
+        emptySetTester.add(1);
+        emptySetTester.add(1);
+        Integer actual = emptySetTester.size();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void mySetContainsFalseTest() {
+        Boolean expected = false;
+        Boolean actual = s.contains("horse");
         assertEquals(expected,actual);
     }
 
+    @Test
+    public void mySetContainsTrueTest() {
+        Boolean expected = true;
+        Boolean actual = s.contains(1);
+        assertEquals(expected,actual);
+    }
+
+    @Test
     public void mySetAddAllTest() {
         Boolean expected = null;
         Boolean actual = null;
+        assertEquals(expected,actual);
     }
 
     public void mySetClearTest() {
