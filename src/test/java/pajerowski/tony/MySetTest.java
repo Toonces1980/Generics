@@ -21,12 +21,24 @@ public class MySetTest {
         r.add(1);
         r.add(2);
         r.add(3);
+        r.add(3);
+        s.add(1);
+        s.add(2);
+        s.add(3);
+        s.add(4);
     }
 
     @Test
     public void mySetAddTest() {
-        Boolean expected = false;
+        Boolean expected = true;
         Boolean actual = s.add("1");
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void mySetAddTestValueAdded() {
+        Integer expected = 1;
+        Integer actual = s.size();
         assertEquals(expected,actual);
     }
 
