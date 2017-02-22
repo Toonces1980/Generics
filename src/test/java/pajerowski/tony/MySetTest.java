@@ -74,13 +74,45 @@ public class MySetTest {
         assertEquals(expected,actual);
     }
 
+    @Test
+    public void mySetIsEmptyTrueTest() {
+        Boolean expected = true;
+        Boolean actual = emptySetTester.isEmpty();
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void mySetIsEmptyFalseTest() {
+        Boolean expected = false;
+        Boolean actual = s.isEmpty();
+        assertEquals(expected,actual);
+    }
+
+    @Test
     public void mySetClearTest() {
         Integer expected = 0;
-        s.add(1);
         s.clear();
         Integer actual = s.size();
         assertEquals(expected,actual);
     }
+
+    @Test
+    public void mySetEqualsTrueTest() {
+        Boolean expected = true;
+        emptySetTester.add(1);
+        emptySetTester.add(2);
+        emptySetTester.add(3);
+        Boolean actual = s.equals(emptySetTester);
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void mySetEqualsFalseTest() {
+        Boolean expected = false;
+        Boolean actual = s.equals(emptySetTester);
+        assertEquals(expected,actual);
+    }
+
 
     public void mySetContainsTest() {
         Boolean expected = null;
@@ -94,20 +126,11 @@ public class MySetTest {
         assertEquals(expected,actual);
     }
 
-    public void mySetEqualsTest() {
-        Boolean expected = null;
-        Boolean actual = null;
-        assertEquals(expected,actual);
-    }
 
     public void mySetHashCodeTest() {
     }
 
-    public void mySetIsEmptyTest() {
-        Boolean expected = null;
-        Boolean actual = null;
-        assertEquals(expected,actual);
-    }
+
 
     public void mySetIteratorTest() {
     }

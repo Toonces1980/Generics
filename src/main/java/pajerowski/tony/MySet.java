@@ -9,7 +9,7 @@ import java.util.Iterator;
  */
 public class MySet<E> implements Iterable<E>{
     private Object[] mySetBackingArray;
-    int currentElements;
+    int currentElements = 0;
 
     MySet() {
         mySetBackingArray = new Object[10];
@@ -70,15 +70,33 @@ public class MySet<E> implements Iterable<E>{
         return false;
     }
 
-    public boolean	equals(Object o) {
+    public boolean equals(Object o) {
+        for (Object elem : mySetBackingArray) {
+            if (this.contains(o) == false) {
+                return false;
+            }
+            return true;
+        }
         return false;
     }
 
-    public  int	hashCode() {return -1;}
 
-    public boolean	isEmpty() {
-        return false;
+
+
+    public  int	hashCode() {
+        return -1;
     }
+
+
+    public boolean isEmpty(){
+        if(currentElements == 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 
     boolean	remove(Object o) {
         return false;
@@ -111,25 +129,7 @@ public class MySet<E> implements Iterable<E>{
 }
 
 
-//
-//    private E[] backingArray;
-//    private int numElements;
-//
-//    /**
-//     * Constructor for objects of class MySet
-//     */
-//    public MySet()
-//    {
-//        backingArray=(E[]) new Object[5];
-//        numElements=0;
-//    }
-//
-//    }
-//    public void clear(){
-//        E[] newArray=(E[])new Object[backingArray.length];
-//        numElements=0;
-//        backingArray=newArray;
-//    }
+
 //    public boolean equals(Object o){
 //        if(o instanceof Set &&(((Set)o).size()==numElements)){
 //            for(E elem:(Set<E>)o){
@@ -166,14 +166,7 @@ public class MySet<E> implements Iterable<E>{
 //        }
 //        return sum;
 //    }
-//    public boolean isEmpty(){
-//        if(numElements==0){
-//            return true;
-//        }
-//        else{
-//            return false;
-//        }
-//    }
+
 //    public boolean remove(Object o){
 //        int i=0;
 //        for(Object elem:backingArray){
@@ -202,9 +195,6 @@ public class MySet<E> implements Iterable<E>{
 //            }
 //        }
 //        return false;
-//    }
-//    public int size(){
-//        return numElements;
 //    }
 //    public  <T> T[] toArray(T[] a) throws ArrayStoreException,NullPointerException{
 //        for(int i=0;i<numElements;i++){
@@ -259,8 +249,6 @@ public class MySet<E> implements Iterable<E>{
 //    }
 //}
 //}
-//
-
 
 
 
