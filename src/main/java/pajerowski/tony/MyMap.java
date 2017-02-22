@@ -1,95 +1,75 @@
 package pajerowski.tony;
 
-import java.util.*;
-import java.util.HashMap;
+
+import java.util.Arrays;
+
 /**
  * Created by anthonypajerowski on 2/22/17.
  */
-public class MyMap<K,V> {  // need to use a linked list to implement map
 
-    static class Node<K,V> implements Map.Entry<K,V> {
-        private K key;
-        private V value;
-        MyMap.Node<K,V> next;
+public class MyMap<K, V> {
+    private int size;
+    private int capacity = 10;
 
-        Node(int hash, K key, V value, MyMap.Node<K,V> next) {
-            this.key = key;
-            this.value = value;
-            this.next = next;
-        }
+    private MyEntry<K, V>[] values = new MyEntry[capacity];
 
-        public K getKey()        { return key; }
-        public V getValue()      { return value; }
-        public String toString() { return key + "=" + value; }
-
-        public final int hashCode() {
-            return Objects.hashCode(key) ^ Objects.hashCode(value);
-        }
-
-        public final V setValue(V newValue) {
-            V oldValue = value;
-            value = newValue;
-            return oldValue;
-        }
-
-        public final boolean equals(Object o) {
-            if (o == this)
-                return true;
-            if (o instanceof Map.Entry) {
-                Map.Entry<?,?> e = (Map.Entry<?,?>)o;
-                if (Objects.equals(key, e.getKey()) &&
-                        Objects.equals(value, e.getValue()))
-                    return true;
+    public V get(K key) {
+        for (int i = 0; i < size; i++) {
+            if (values[i] != null) {
+                if (values[i].getKey().equals(key)) {
+                    return values[i].getValue();
+                }
             }
-            return false;
+        }
+        return null;
+    }
+
+    public void put(K key, V value) {
+        boolean insert = true;
+        for (int i = 0; i < size; i++) {
+            if (values[i].getKey().equals(key)) {
+                values[i].setValue(value);
+                insert = false;
+            }
+        }
+        if (insert) {
+            autoResize();
+            values[size++] = new MyEntry<K, V>(key, value);
         }
     }
 
     public int size() {
-        return 0;
+        return size;
     }
 
-    public boolean isEmpty() {
-        return false;
+    private void autoResize() {
+        if (size == values.length) {
+            int newSize = values.length * 2;
+            values = Arrays.copyOf(values, newSize);
+        }
     }
 
-    public boolean containsKey(Object key) {
-        return false;
+    public void remove(K key) {
+        for (int i = 0; i < size; i++) {
+            if (values[i].getKey().equals(key)) {
+                values[i] = null;
+                size--;
+                shrinkArray(i);
+            }
+        }
     }
 
-    public boolean containsValue(Object value) {
-        return false;
+    private void shrinkArray(int start) {
+        for (int i = start; i < size; i++) {
+            values[i] = values[i + 1];
+        }
     }
 
-    public V get(Object key) {
-        return null;
-    }
-
-    public V put(K key, V value) {
-        return null;
-    }
-
-    public V remove(Object key) {
-        return null;
-    }
-
-    public void putAll(Map<? extends K, ? extends V> m) {
-
-    }
-
-    public void clear() {
-
-    }
-
-    public Set<K> keySet() {
-        return null;
-    }
-
-    public Collection<V> values() {
-        return null;
-    }
-
-    public Set<Map.Entry<K, V>> entrySet() {
-        return null;
+    public MySet<K> keySet() {
+        MySet<K> set = new MySet<K>();
+        for (int i = 0; i < size; i++) {
+            set.add(values[i].getKey());
+        }
+        return set;
     }
 }

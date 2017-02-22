@@ -2,12 +2,11 @@ package pajerowski.tony;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Iterator;
 
 /**
  * Created by anthonypajerowski on 2/22/17.
  */
-public class MySet<E> implements Iterable<E>{
+public class MySet<E>{
     private Object[] mySetBackingArray;
     private int initialCapacity = 0;
     int currentElements = 0;
@@ -129,11 +128,6 @@ public class MySet<E> implements Iterable<E>{
     }
 
     <T> T[]	toArray(T[] a) {
-        return null;
-    }
-
-
-    public Iterator<E> iterator() {
         return null;
     }
 }
